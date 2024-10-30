@@ -23,10 +23,10 @@ int main() {
 
     // Sequential computation
     double time_sequential_start = omp_get_wtime();
-    for (int i = 0; i < NA - NF + 1; i++) {
+    for (int i = 0; i < NA-NF+1; i++) {
         int conv_sum = 0;
         for (int j = 0; j < NF; j++) {
-            conv_sum += A[i + j] * F[NF - j - 1];
+            conv_sum += A[i+j] * F[NF-1-j];
         }
         R2[i] = conv_sum;
     }
@@ -38,10 +38,10 @@ int main() {
     double time_parallel_start = omp_get_wtime();
     omp_set_num_threads(8);
     #pragma omp parallel for schedule(static)
-    for (int i = 0; i < NA - NF + 1; i++) {
+    for (int i = 0; i < NA-NF+1; i++) {
         int conv_sum = 0;
         for (int j = 0; j < NF; j++) {
-            conv_sum += A[i + j] * F[NF - j - 1];
+            conv_sum += A[i+j] * F[NF-1-j];
         }
         R[i] = conv_sum;
     }
@@ -58,6 +58,6 @@ int main() {
     free(R2);
     free(F);
     free(A);
-    
+
     return 0;
 }
