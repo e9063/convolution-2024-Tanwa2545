@@ -20,8 +20,8 @@ int main(){
     int *R = malloc(sizeof(int) * (NA-NF+1));
     for(int i = 0; i < NA-NF+1; i++){
         int conv_sum = 0;
-        for(int j = NF-1; j >= 0; j--){
-            conv_sum += A[i+(NF-1)-j] * F[j];
+        for(int j = 0; j < NF; j++){
+            conv_sum += A[i+j] * F[NF-1-j];
         }
         R[i] = conv_sum;
     }
